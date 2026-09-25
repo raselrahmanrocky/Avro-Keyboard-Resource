@@ -1,0 +1,4 @@
+# Resource files are stored byte-for-byte exactly as they appear locally:
+# no LF/CRLF conversion on add or checkout. This keeps the SHA-256 values in
+# index.json identical to the bytes GitHub serves for every download.
+* -text
