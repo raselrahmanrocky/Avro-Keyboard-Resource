@@ -95,8 +95,7 @@ powershell -ExecutionPolicy Bypass -File .github\scripts\generate-index.ps1
 
 ## English
 
-A downloadable resource pack for [Avro Keyboard](https://github.com/omicro/Avro-Keyboard):
-ANSI mappings, keyboard layouts, fonts, skins and documentation — so users can
+A downloadable resource pack for `Avro Keyboard` ANSI mappings, keyboard layouts, fonts, skins and documentation — so users can
 restore or add resources without reinstalling the whole application.
 
 ### How to use
