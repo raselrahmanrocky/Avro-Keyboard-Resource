@@ -1,0 +1,50 @@
+name: Update resource index
+
+# Regenerates index.json whenever resource files change, so any file added to
+# this repository (git or the GitHub web UI) shows up in Avro Keyboard's
+# Download Resources section automatically within a few minutes.
+#
+# Loop safety: index.json itself never triggers this workflow, the script is a
+# no-op when nothing changed (so there is nothing to commit), and pushes made
+# with the built-in GITHUB_TOKEN never re-trigger workflows.
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'index.json'
+      - 'README.md'
+      - 'LICENSE'
+      - 'licenses/**'
+      - '.github/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-index
+  cancel-in-progress: false
+
+jobs:
+  update-index:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Regenerate index.json
+        shell: pwsh
+        run: ./.github/scripts/generate-index.ps1
+
+      - name: Commit and push if changed
+        run: |
+          if git diff --quiet -- index.json; then
+            echo "index.json unchanged - nothing to commit."
+            exit 0
+          fi
+          git config user.name "avro-index-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.json
+          git commit -m "chore: regenerate index.json [skip ci]"
+          git push

@@ -59,17 +59,58 @@ every entry carries `sha256` + `size` for post-download verification.
 
 ---
 
+## নতুন ফাইল যোগ করবেন / Adding a resource (plug & play)
+
+সঠিক ফোল্ডারে ফাইলটা যোগ করে push করুন (git অথবা GitHub ওয়েব UI) — এর বাইরে
+কিছুই করতে হবে না। GitHub Actions অটো `index.json` রিজেনারেট করে, আর কয়েক
+মিনিটের মধ্যে অ্যাপের **Download Resources**-এ ফাইলটা চলে আসবে।
+`index.json` কখনো হাতে ছুঁয়ে লেখবেন না।
+
+Drop a file into the right folder and push (git or the GitHub web UI) — that is
+all. GitHub Actions regenerates `index.json` automatically and the file shows
+up in Avro Keyboard's **Download Resources** within minutes. Never edit
+`index.json` by hand.
+
+| ফোল্ডার | এক্সটেনশন | টাইপ |
+|---|---|---|
+| `AnsiMapping/` | `.AvroEnco` | ANSI mapping |
+| `KeyboardLayouts/` | `.avrolayout` | keyboard layout |
+| `Fonts/` | `.ttf`, `.otf` | font |
+| `Skins/` | `.avroskin` | skin |
+| `Docs/` | `.pdf`, `.htm`, `.html` | document |
+
+* নতুন টপ-লেভেল ফোল্ডার বানালেও চলবে — সেটা অ্যাপে নতুন ক্যাটাগরি হিসেবে
+  দেখাবে (শুধু সাপোর্টেড এক্সটেনশনের ফাইলই তালিকাভুক্ত হবে)।
+* English বর্ণনা/ভার্সন দিতে চাইলে ফাইলের পাশে একটা `<নাম>.meta.json` সাইডকার
+  দিন — `{"description": "...", "version": "..."}`। সাইডকার থাকলে সেটাই
+  জিতবে, না থাকলে আগের description, তাও না থাকলে ফাইলনাম।
+* এই তালিকার বাইরের এক্সটেনশন (`.zip` ইত্যাদি) এখন স্কিপ হবে — দরকার হলে
+  অ্যাপের কোড আপগ্রেড করে যোগ করা হবে।
+
+---
+
 ## মেইনটেইনারদের জন্য / For maintainers
 
-রিসোর্সগুলো মূল রিপোর থেকে জেনারেট হয় — হাতে কপি করবেন না:
+`assets\` থেকে পাঁচটা ক্যাটাগরি ফোল্ডার রিসিংক করতে (মিরর করতে) মেইন
+Avro-Keyboard রিপো থেকে:
 
 ```powershell
 # Avro-Keyboard রিপোর থেকে:
 powershell -ExecutionPolicy Bypass -File tools\resource-sync\generate-resource-index.ps1
 ```
 
-স্ক্রিপ্টটি `assets\` থেকে ফাইল সিঙ্ক করে, SHA-256 হিসাব করে এবং `index.json`
-রিজেনারেট করে। এরপর এই রিপোতে কমিট ও push করুন।
+স্ক্রিপ্টটি ক্যাটাগরি ফোল্ডার মিরর করার আগে সতর্কতা দেয়, `*.meta.json`
+সাইডকার সংরক্ষণ করে, ANSI metadata থেকে sidecar বানায় — এবং `index.json`
+রিজেনারেট করে রিসোর্স রিপোরের নিজের স্ক্যানারের মাধ্যমে
+(`.github/scripts/generate-index.ps1`)। এরপর এই রিপোতে কমিট ও push করুন।
+
+Actions না চললে (বা সরাসরি index বানাতে চাইলে) স্ক্যানারটাই লোকালি চালিয়ে
+দিন — সেটা শুধু `index.json` লেখে, বাকি কিছু ছোঁয় না:
+
+```powershell
+# এই রিপোরে, লোকালি (Actions fallback):
+powershell -ExecutionPolicy Bypass -File .github\scripts\generate-index.ps1
+```
 
 ---
 

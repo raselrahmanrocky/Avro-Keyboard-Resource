@@ -7,14 +7,12 @@
                        {
                            "id":  "ansimapping",
                            "title":  "ANSI Mapping",
-                           "titleBn":  "ANSI ম্যাপিং",
                            "items":  [
                                          {
                                              "file":  "AnsiMapping/Ansi V1.AvroEnco",
                                              "name":  "Ansi V1",
                                              "type":  "ansimapping",
                                              "description":  "ANSI V1 - version 1.2, by Mustafa Jabbar. Suggested font: Lekhoni ANSI V1, Kalpurush ANSI, Siyam Rupali ANSI",
-                                             "descriptionBn":  "ANSI V1 - ভার্সন 1.2, ডেভেলপার: Mustafa Jabbar. প্রস্তাবিত ফন্ট: Lekhoni ANSI V1, Kalpurush ANSI, Siyam Rupali ANSI",
                                              "size":  68319,
                                              "sha256":  "617a527a6288033913ed04fc0702ea22b88b25996bb2800daa670e3010cfd25a",
                                              "version":  "1.2"
@@ -24,7 +22,6 @@
                                              "name":  "Ansi V2",
                                              "type":  "ansimapping",
                                              "description":  "ANSI V2 - version 2.1, by Mustafa Jabbar. Suggested font: SutonnyMJ, SamakalMJ, JugantorMJ",
-                                             "descriptionBn":  "ANSI V2 - ভার্সন 2.1, ডেভেলপার: Mustafa Jabbar. প্রস্তাবিত ফন্ট: SutonnyMJ, SamakalMJ, JugantorMJ",
                                              "size":  68470,
                                              "sha256":  "b9ad89d94ac86cfe1674b6a13b50b331e8f64864585a218e11f6ae9ee0f1d790",
                                              "version":  "2.1"
@@ -34,7 +31,6 @@
                                              "name":  "Ansi V3",
                                              "type":  "ansimapping",
                                              "description":  "ANSI V3 - version 1.1, by Dev Infotech. Suggested font: STM-BNT-Arjun, Soumili-NT43",
-                                             "descriptionBn":  "ANSI V3 - ভার্সন 1.1, ডেভেলপার: Dev Infotech. প্রস্তাবিত ফন্ট: STM-BNT-Arjun, Soumili-NT43",
                                              "size":  107473,
                                              "sha256":  "72c3c7e66c24c7edc26692b96133a2270fac264df4b804230cf9994ded0f95bd",
                                              "version":  "1.1"
@@ -44,7 +40,6 @@
                                              "name":  "Ansi V4",
                                              "type":  "ansimapping",
                                              "description":  "ANSI V4 - version 1.1, by Computer Village. Suggested font: BanglapediaII, Ittefaq, Prothoma",
-                                             "descriptionBn":  "ANSI V4 - ভার্সন 1.1, ডেভেলপার: Computer Village. প্রস্তাবিত ফন্ট: BanglapediaII, Ittefaq, Prothoma",
                                              "size":  69042,
                                              "sha256":  "a296e76f27719ba87337b19ae4e8decd22479ca1db118d488b5edd86ae8e93bd",
                                              "version":  "1.1"
@@ -54,14 +49,12 @@
                        {
                            "id":  "keyboardlayouts",
                            "title":  "Keyboard Layouts",
-                           "titleBn":  "কীবোর্ড লেআউট",
                            "items":  [
                                          {
                                              "file":  "KeyboardLayouts/Avro Easy.avrolayout",
                                              "name":  "Avro Easy",
                                              "type":  "layout",
                                              "description":  "Avro Easy fixed keyboard layout - beginner friendly phonetic-style key arrangement.",
-                                             "descriptionBn":  "অ্যাভ্রো ইজি ফিক্সড কীবোর্ড লেআউট - শিক্ষার্থীদের জন্য সহজ বিন্যাস।",
                                              "size":  2116147,
                                              "sha256":  "7313d2e255c3a8e8545d71145e60bf3931d9806c07553caf433f4eb2dae7aa51"
                                          },
@@ -70,7 +63,6 @@
                                              "name":  "Bijoy Layout",
                                              "type":  "layout",
                                              "description":  "Bijoy compatible fixed keyboard layout (Unicode).",
-                                             "descriptionBn":  "বিজয় সমন্বিত ফিক্সড কীবোর্ড লেআউট (ইউনিকোড)।",
                                              "size":  2063660,
                                              "sha256":  "9d80ce88b607e57b04eabd8ff84cc9e5966a2853f39b67da6c810854ec098f20"
                                          },
@@ -79,7 +71,6 @@
                                              "name":  "Bornona",
                                              "type":  "layout",
                                              "description":  "Bornona fixed keyboard layout.",
-                                             "descriptionBn":  "বরণা ফিক্সড কীবোর্ড লেআউট।",
                                              "size":  1064904,
                                              "sha256":  "dfea88eced26784a99e07884af52ca01c41b964eab4b10ac3642ca44d622c2d0"
                                          },
@@ -88,7 +79,6 @@
                                              "name":  "Munir_Optima__uni_",
                                              "type":  "layout",
                                              "description":  "Munir Optima (Unicode) fixed keyboard layout.",
-                                             "descriptionBn":  "মুনির অপ্টিমা (ইউনিকোড) ফিক্সড কীবোর্ড লেআউট।",
                                              "size":  2075443,
                                              "sha256":  "b12d480f302a66cc8c3c3c0959e2cf6b8d441ca37199ffacb519612cb79e5825"
                                          },
@@ -97,7 +87,6 @@
                                              "name":  "National (Jatiya)",
                                              "type":  "layout",
                                              "description":  "National (Jatiya) fixed keyboard layout.",
-                                             "descriptionBn":  "জাতীয় ফিক্সড কীবোর্ড লেআউট।",
                                              "size":  2116226,
                                              "sha256":  "ee19a5addec7613f7aea07d55a53fcc28bfc05ce79f8e028ed219bf565df16fb"
                                          },
@@ -106,7 +95,6 @@
                                              "name":  "Probhat",
                                              "type":  "layout",
                                              "description":  "Probhat fixed keyboard layout - popular among developers.",
-                                             "descriptionBn":  "প্রভাত ফিক্সড কীবোর্ড লেআউট - ডেভেলপারদের কাছে জনপ্রিয়।",
                                              "size":  2075372,
                                              "sha256":  "1a30c40e5f605a480dfec534987133368841bee9b4398eb122f0f39174fdae56"
                                          }
@@ -115,14 +103,12 @@
                        {
                            "id":  "fonts",
                            "title":  "Fonts",
-                           "titleBn":  "ফন্ট",
                            "items":  [
                                          {
                                              "file":  "Fonts/kalpurush ANSI.ttf",
                                              "name":  "kalpurush ANSI",
                                              "type":  "font",
                                              "description":  "Kalpurush ANSI - classic Bangla ANSI font (for ANSI encoding).",
-                                             "descriptionBn":  "কালপুরুষ ANSI - ক্লাসিক বাংলা ANSI ফন্ট (ANSI এনকোডিংয়ের জন্য)।",
                                              "size":  113300,
                                              "sha256":  "bfb06b2360a558424c61405a29c24b09c70487757204814c6dd04621a2a9eebc"
                                          },
@@ -131,7 +117,6 @@
                                              "name":  "kalpurush",
                                              "type":  "font",
                                              "description":  "Kalpurush - popular Bangla Unicode font.",
-                                             "descriptionBn":  "কালপুরুষ - জনপ্রিয় বাংলা ইউনিকোড ফন্ট।",
                                              "size":  314592,
                                              "sha256":  "83613a03e53aad8337f2be9fb974409a23c1d99b3b4b494567ba9d156c492b01"
                                          },
@@ -140,7 +125,6 @@
                                              "name":  "Siyam Rupali ANSI",
                                              "type":  "font",
                                              "description":  "Siyam Rupali ANSI - modern Bangla ANSI font (for ANSI encoding).",
-                                             "descriptionBn":  "শিয়াম রূপালী ANSI - আধুনিক বাংলা ANSI ফন্ট (ANSI এনকোডিংয়ের জন্য)।",
                                              "size":  93000,
                                              "sha256":  "e434a9b4cdc228ffdc713202eadecbe2387dbbb9392a64e8a560f8ebba9cff30"
                                          },
@@ -149,7 +133,6 @@
                                              "name":  "Siyamrupali",
                                              "type":  "font",
                                              "description":  "Siyam Rupali - modern Bangla Unicode font.",
-                                             "descriptionBn":  "শিয়াম রূপালী - আধুনিক বাংলা ইউনিকোড ফন্ট।",
                                              "size":  401040,
                                              "sha256":  "54a85c66ad1e6f0c50d3bda85eba5a4975fe49d06819d23230a15f3d7f0573ae"
                                          }
@@ -158,14 +141,12 @@
                        {
                            "id":  "skins",
                            "title":  "Skins",
-                           "titleBn":  "স্কিন",
                            "items":  [
                                          {
                                              "file":  "Skins/Aero7 dark.avroskin",
                                              "name":  "Aero7 dark",
                                              "type":  "skin",
                                              "description":  "Avro keyboard skin: Aero7 dark.",
-                                             "descriptionBn":  "অ্যাভ্রো কীবোর্ড স্কিন: Aero7 dark.",
                                              "size":  160381,
                                              "sha256":  "1e83db579042de8f8959318d93ed56e905d968eeefc13c6dad906052e37c755e"
                                          },
@@ -174,7 +155,6 @@
                                              "name":  "Avro Classic",
                                              "type":  "skin",
                                              "description":  "Avro keyboard skin: Avro Classic.",
-                                             "descriptionBn":  "অ্যাভ্রো কীবোর্ড স্কিন: Avro Classic.",
                                              "size":  102235,
                                              "sha256":  "9680bb8631aa6f5cad6861265d294bd8e14a1835b7f21c5f18c06bb891545c3c"
                                          },
@@ -183,7 +163,6 @@
                                              "name":  "Avro Flat (cyan)",
                                              "type":  "skin",
                                              "description":  "Avro keyboard skin: Avro Flat (cyan).",
-                                             "descriptionBn":  "অ্যাভ্রো কীবোর্ড স্কিন: Avro Flat (cyan).",
                                              "size":  212867,
                                              "sha256":  "f8677434846191395e53430985edda2b8dc6dcf581ddd36abe7c7fd0bdc3db33"
                                          },
@@ -192,7 +171,6 @@
                                              "name":  "Avro Flat (Mint)",
                                              "type":  "skin",
                                              "description":  "Avro keyboard skin: Avro Flat (Mint).",
-                                             "descriptionBn":  "অ্যাভ্রো কীবোর্ড স্কিন: Avro Flat (Mint).",
                                              "size":  212874,
                                              "sha256":  "877c7313afceeea52219fe05d4cd3848035d6e776b795764ee1b1451c1db870f"
                                          },
@@ -201,7 +179,6 @@
                                              "name":  "Avro Flat (Red)",
                                              "type":  "skin",
                                              "description":  "Avro keyboard skin: Avro Flat (Red).",
-                                             "descriptionBn":  "অ্যাভ্রো কীবোর্ড স্কিন: Avro Flat (Red).",
                                              "size":  212873,
                                              "sha256":  "5bc0f2e89967098c1c65ebdbb5b32da350712c3304c9e7e4f2103dce01ffaf70"
                                          },
@@ -210,7 +187,6 @@
                                              "name":  "Avro Flat (Yellow)",
                                              "type":  "skin",
                                              "description":  "Avro keyboard skin: Avro Flat (Yellow).",
-                                             "descriptionBn":  "অ্যাভ্রো কীবোর্ড স্কিন: Avro Flat (Yellow).",
                                              "size":  212876,
                                              "sha256":  "4bc84f23079b0ae1a8e488005cfbf5a8c9a2bf4284edada242c920d16f18c4b2"
                                          },
@@ -219,7 +195,6 @@
                                              "name":  "Avro Luna",
                                              "type":  "skin",
                                              "description":  "Avro keyboard skin: Avro Luna.",
-                                             "descriptionBn":  "অ্যাভ্রো কীবোর্ড স্কিন: Avro Luna.",
                                              "size":  119455,
                                              "sha256":  "33e65ad7a6c74b45b3a9eb3364ac488869f814d65d803b7d28fed82637acec1b"
                                          },
@@ -228,7 +203,6 @@
                                              "name":  "Avro Royal",
                                              "type":  "skin",
                                              "description":  "Avro keyboard skin: Avro Royal.",
-                                             "descriptionBn":  "অ্যাভ্রো কীবোর্ড স্কিন: Avro Royal.",
                                              "size":  196019,
                                              "sha256":  "f52a2a373ade444ff33457936e67657b047a10ab4f287dc1c3cfbd5ab610d5f3"
                                          },
@@ -237,7 +211,6 @@
                                              "name":  "Avro Vista 2",
                                              "type":  "skin",
                                              "description":  "Avro keyboard skin: Avro Vista 2.",
-                                             "descriptionBn":  "অ্যাভ্রো কীবোর্ড স্কিন: Avro Vista 2.",
                                              "size":  158614,
                                              "sha256":  "f0441835884bba59e73edd9d326530c1a70ed41b6fc7643edd7181eb02970af4"
                                          },
@@ -246,7 +219,6 @@
                                              "name":  "Avro Vista",
                                              "type":  "skin",
                                              "description":  "Avro keyboard skin: Avro Vista.",
-                                             "descriptionBn":  "অ্যাভ্রো কীবোর্ড স্কিন: Avro Vista.",
                                              "size":  127203,
                                              "sha256":  "0b5ed4a0a68a04adbf28011504a7265faf5fa0759aa1efebe96a54c817d09b49"
                                          },
@@ -255,7 +227,6 @@
                                              "name":  "iAvro",
                                              "type":  "skin",
                                              "description":  "Avro keyboard skin: iAvro.",
-                                             "descriptionBn":  "অ্যাভ্রো কীবোর্ড স্কিন: iAvro.",
                                              "size":  98227,
                                              "sha256":  "145791285d311b4daf9b579afb39c93d63d838722fccd3bb41b10f1577724842"
                                          }
@@ -264,14 +235,12 @@
                        {
                            "id":  "docs",
                            "title":  "Docs",
-                           "titleBn":  "ডকুমেন্ট",
                            "items":  [
                                          {
                                              "file":  "Docs/Bangla Typing with Avro Mouse.pdf",
                                              "name":  "Bangla Typing with Avro Mouse",
                                              "type":  "doc",
                                              "description":  "Guide: Bangla typing with Avro Mouse.",
-                                             "descriptionBn":  "গাইড: অ্যাভ্রো মাউস দিয়ে বাংলা টাইপিং।",
                                              "size":  189808,
                                              "sha256":  "33c9c651488d2eef8a02c1765c7d3fac8ed99224e186848399de7ff000028a8f"
                                          },
@@ -280,7 +249,6 @@
                                              "name":  "Bangla Typing with Avro Phonetic",
                                              "type":  "doc",
                                              "description":  "Guide: Bangla typing with Avro Phonetic.",
-                                             "descriptionBn":  "গাইড: অ্যাভ্রো ফোনেটিক দিয়ে বাংলা টাইপিং।",
                                              "size":  341622,
                                              "sha256":  "25011907bc74385eb07da27e073917d0981fc6559e88cdd1be602a29ee9d8789"
                                          },
@@ -289,7 +257,6 @@
                                              "name":  "Bangla Typing with Fixed Keyboard Layouts",
                                              "type":  "doc",
                                              "description":  "Guide: Bangla typing with fixed keyboard layouts.",
-                                             "descriptionBn":  "গাইড: ফিক্সড কীবোর্ড লেআউট দিয়ে বাংলা টাইপিং।",
                                              "size":  270879,
                                              "sha256":  "7ef0499718d67a3ed6cb112f3eea681ba00d19ea26af84ffed366d7e169b6f3f"
                                          },
@@ -298,7 +265,6 @@
                                              "name":  "Before You Start",
                                              "type":  "doc",
                                              "description":  "Installation and first-run basics.",
-                                             "descriptionBn":  "ইনস্টলেশন ও প্রাথমিক নির্দেশনা।",
                                              "size":  168202,
                                              "sha256":  "d015051d55f6a240c099fe14f1900c6013d4463611e82730fec2bcee00baa571"
                                          },
@@ -307,7 +273,6 @@
                                              "name":  "Configuring_system",
                                              "type":  "doc",
                                              "description":  "System configuration steps for Avro Keyboard.",
-                                             "descriptionBn":  "অ্যাভ্রো কীবোর্ডের সিস্টেম কনফিগারেশন।",
                                              "size":  3785,
                                              "sha256":  "d204a4d6b097b995ddd88dc9943a59aa2e6c2df35f75c2d62cb33b3e70fa60d6"
                                          },
@@ -316,7 +281,6 @@
                                              "name":  "Customizing Avro Keyboard",
                                              "type":  "doc",
                                              "description":  "Guide: customizing Avro Keyboard.",
-                                             "descriptionBn":  "গাইড: অ্যাভ্রো কীবোর্ড কাস্টমাইজেশন।",
                                              "size":  224443,
                                              "sha256":  "552fb3f3cb293022a54b77942cef9e78e1cce901b293ad45a04bf0d3ff4bdaa6"
                                          },
@@ -325,7 +289,6 @@
                                              "name":  "Editing Keyboard Layout",
                                              "type":  "doc",
                                              "description":  "Guide: editing keyboard layouts.",
-                                             "descriptionBn":  "গাইড: কীবোর্ড লেআউট এডিটিং।",
                                              "size":  225156,
                                              "sha256":  "6a55c091581efad176f501c1a0fcf51b8ff22e69e89f49b371b8738f69913a3c"
                                          },
@@ -334,7 +297,6 @@
                                              "name":  "help_on_help",
                                              "type":  "doc",
                                              "description":  "Help on help - how to use Avro help.",
-                                             "descriptionBn":  "হেল্প অন হেল্প।",
                                              "size":  2041,
                                              "sha256":  "1c631a494e50b8b6c50c0b325c46d3b7638b742036c9d0a37fd653a77b5dc993"
                                          },
@@ -343,7 +305,6 @@
                                              "name":  "open_type_font_list",
                                              "type":  "doc",
                                              "description":  "OpenType font list.",
-                                             "descriptionBn":  "ওপেনটাইপ ফন্ট তালিকা।",
                                              "size":  1732,
                                              "sha256":  "78547e936e7381bc21fd53368e6885e6686ee04dd38d16e8127febbffa074c4b"
                                          },
@@ -352,7 +313,6 @@
                                              "name":  "Overview",
                                              "type":  "doc",
                                              "description":  "Avro Keyboard feature overview.",
-                                             "descriptionBn":  "অ্যাভ্রো কীবোর্ড ফিচার ওভারভিউ।",
                                              "size":  117286,
                                              "sha256":  "677bc1b7661b14ac497c88ad4a968e92a477d35ea8ab8068a9c462205de593b6"
                                          }
