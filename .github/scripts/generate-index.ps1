@@ -17,7 +17,7 @@
       any new folder is appended alphabetically as a new category.
     * Extension -> type:  .avrolayout layout | .ttf/.otf font | .avroskin skin
                           .AvroEnco ansimapping | .pdf/.htm/.html doc
-                          .dct dict
+                          .dct/.db3 dict
       Every other extension inside a category folder is skipped (logged).
     * Description/version precedence per file, keyed by repo-relative path:
         1. <basename>.meta.json sidecar next to the file (keys present win)
@@ -44,7 +44,7 @@ if (-not (Test-Path -LiteralPath $RepoRoot)) { throw "RepoRoot not found: $RepoR
 $RepoName = 'raselrahmanrocky/Avro-Keyboard-Resource'
 $Branch   = 'main'
 
-$KnownOrder = @('AnsiMapping', 'KeyboardLayouts', 'Fonts', 'Skins', 'Docs', 'Dictionary')
+$KnownOrder = @('AnsiMapping', 'KeyboardLayouts', 'Fonts', 'Skins', 'Docs', 'Dictionary', 'WordDatabase')
 $SkipFolders = @('licenses')
 $NiceTitles = @{
     'AnsiMapping'     = 'ANSI Mapping'
@@ -53,6 +53,7 @@ $NiceTitles = @{
     'Skins'           = 'Skins'
     'Docs'            = 'Docs'
     'Dictionary'      = 'Auto-Correct Dictionary'
+    'WordDatabase'    = 'Word Database'
 }
 
 # Extension (lowercase, with dot) -> catalog "type" understood by the app's
@@ -66,9 +67,11 @@ $TypeByExt = @{
     '.pdf'        = 'doc'
     '.htm'        = 'doc'
     '.html'       = 'doc'
-    # type 'dict' installs into C:\ProgramData\Avro Keyboard\ (the folder
-    # uAutoCorrect reads autodict.dct from) - see uResourceInstaller.pas.
+    # type 'dict' installs straight into C:\ProgramData\Avro Keyboard\ + the
+    # folder uAutoCorrect reads autodict.dct from and uDBase reads
+    # Database.db3 from - see uResourceInstaller.pas.
     '.dct'        = 'dict'
+    '.db3'        = 'dict'
 }
 
 # ---------------------------------------------------------------------------
@@ -98,7 +101,7 @@ function ConvertTo-CanonicalJson {
         $parts = foreach ($k in $keys) {
             $pad2 + '"' + [string]$k + '": ' + (ConvertTo-CanonicalJson $Value[$k] ($Depth + 1))
         }
-        return "{`n" + ($parts -join ",`n") + "`n$pad]"
+        return "{`n" + ($parts -join ",`n") + "`n$pad}"
     }
 
     if ($Value -is [System.Collections.IEnumerable]) {
@@ -138,7 +141,7 @@ if (Test-Path -LiteralPath $indexPath) {
 }
 
 # ---------------------------------------------------------------------------
-# Enumerate category folders: known five first, then unknown ones appended.
+# Enumerate category folders: the known ones first, then unknown appended.
 # ---------------------------------------------------------------------------
 $allDirs = @(Get-ChildItem -LiteralPath $RepoRoot -Directory -Force |
     Where-Object { -not $_.Name.StartsWith('.') })
@@ -287,5 +290,16 @@ $index = [ordered]@{
     categories = $categoryList
 }
 $json = ConvertTo-CanonicalJson $index
+
+# A catalog that does not parse is worse than no update at all: the app reads
+# this file with a strict JSON parser, so one writer bug takes the whole
+# Download Resources window down with it - which is exactly how the object
+# closers shipped broken once. Fail loudly here instead of committing it.
+try {
+    $null = $json | ConvertFrom-Json
+} catch {
+    throw "Refusing to write index.json - the canonical writer produced invalid JSON: $($_.Exception.Message)"
+}
+
 [System.IO.File]::WriteAllText($indexPath, $json, (New-Object System.Text.UTF8Encoding($false)))
 Write-Host "index.json updated: $indexPath ($total items, $($categoryList.Count) categories)"
