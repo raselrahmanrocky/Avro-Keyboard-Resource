@@ -13,10 +13,11 @@
 
   Rules:
     * Top-level directory = category (hidden, "licenses" and root files are
-      ignored). The five known folders keep their order and pretty titles;
+      ignored). The known folders keep their order and pretty titles;
       any new folder is appended alphabetically as a new category.
     * Extension -> type:  .avrolayout layout | .ttf/.otf font | .avroskin skin
                           .AvroEnco ansimapping | .pdf/.htm/.html doc
+                          .dct dict
       Every other extension inside a category folder is skipped (logged).
     * Description/version precedence per file, keyed by repo-relative path:
         1. <basename>.meta.json sidecar next to the file (keys present win)
@@ -43,7 +44,7 @@ if (-not (Test-Path -LiteralPath $RepoRoot)) { throw "RepoRoot not found: $RepoR
 $RepoName = 'raselrahmanrocky/Avro-Keyboard-Resource'
 $Branch   = 'main'
 
-$KnownOrder = @('AnsiMapping', 'KeyboardLayouts', 'Fonts', 'Skins', 'Docs')
+$KnownOrder = @('AnsiMapping', 'KeyboardLayouts', 'Fonts', 'Skins', 'Docs', 'Dictionary')
 $SkipFolders = @('licenses')
 $NiceTitles = @{
     'AnsiMapping'     = 'ANSI Mapping'
@@ -51,6 +52,7 @@ $NiceTitles = @{
     'Fonts'           = 'Fonts'
     'Skins'           = 'Skins'
     'Docs'            = 'Docs'
+    'Dictionary'      = 'Auto-Correct Dictionary'
 }
 
 # Extension (lowercase, with dot) -> catalog "type" understood by the app's
@@ -64,6 +66,54 @@ $TypeByExt = @{
     '.pdf'        = 'doc'
     '.htm'        = 'doc'
     '.html'       = 'doc'
+    # type 'dict' installs into C:\ProgramData\Avro Keyboard\ (the folder
+    # uAutoCorrect reads autodict.dct from) - see uResourceInstaller.pas.
+    '.dct'        = 'dict'
+}
+
+# ---------------------------------------------------------------------------
+# Canonical JSON writer.
+# ConvertTo-Json is NOT stable across PowerShell versions (Windows PowerShell
+# 5.1 indents nested levels differently from the pwsh used by CI), and this
+# repository is edited from both. Serializing with one printer keeps the file
+# byte-identical no matter where it was generated, so the no-op detection
+# above really is a no-op and the bot never commits pure formatting churn.
+# ---------------------------------------------------------------------------
+function ConvertTo-CanonicalJson {
+    param($Value, [int]$Depth = 0)
+
+    $pad  = '  ' * $Depth
+    $pad2 = '  ' * ($Depth + 1)
+
+    if ($null -eq $Value) { return 'null' }
+    if ($Value -is [string]) { return ($Value | ConvertTo-Json -Compress) }
+    if ($Value -is [bool])   { if ($Value) { return 'true' } else { return 'false' } }
+    if ($Value -is [ValueType]) { return [string]$Value }
+
+    # Dictionaries first: [ordered] hashtables are IEnumerable too, and
+    # @($dict) yields the dictionary itself - recursing there never ends.
+    if ($Value -is [System.Collections.IDictionary]) {
+        $keys = @($Value.Keys)
+        if ($keys.Count -eq 0) { return '{}' }
+        $parts = foreach ($k in $keys) {
+            $pad2 + '"' + [string]$k + '": ' + (ConvertTo-CanonicalJson $Value[$k] ($Depth + 1))
+        }
+        return "{`n" + ($parts -join ",`n") + "`n$pad]"
+    }
+
+    if ($Value -is [System.Collections.IEnumerable]) {
+        $items = @($Value)
+        if ($items.Count -eq 0) { return '[]' }
+        $parts = foreach ($it in $items) { $pad2 + (ConvertTo-CanonicalJson $it ($Depth + 1)) }
+        return "[`n" + ($parts -join ",`n") + "`n$pad]"
+    }
+
+    $props = @($Value.PSObject.Properties)
+    if ($props.Count -eq 0) { return '{}' }
+    $parts = foreach ($p in $props) {
+        $pad2 + '"' + [string]$p.Name + '": ' + (ConvertTo-CanonicalJson $p.Value ($Depth + 1))
+    }
+    return "{`n" + ($parts -join ",`n") + "`n$pad}"
 }
 
 # ---------------------------------------------------------------------------
@@ -209,7 +259,7 @@ $core = [ordered]@{
     branch     = $Branch
     categories = $categoryList
 }
-$newJson = $core | ConvertTo-Json -Depth 8
+$newJson = ConvertTo-CanonicalJson $core
 
 $oldJson = $null
 if ($null -ne $oldRaw) {
@@ -219,7 +269,7 @@ if ($null -ne $oldRaw) {
         branch     = [string]$oldRaw.branch
         categories = $oldRaw.categories
     }
-    $oldJson = $oldCore | ConvertTo-Json -Depth 8
+    $oldJson = ConvertTo-CanonicalJson $oldCore
 }
 
 if (-not $Force -and ($newJson -eq $oldJson)) {
@@ -236,6 +286,6 @@ $index = [ordered]@{
     branch     = $Branch
     categories = $categoryList
 }
-$json = $index | ConvertTo-Json -Depth 8
+$json = ConvertTo-CanonicalJson $index
 [System.IO.File]::WriteAllText($indexPath, $json, (New-Object System.Text.UTF8Encoding($false)))
 Write-Host "index.json updated: $indexPath ($total items, $($categoryList.Count) categories)"

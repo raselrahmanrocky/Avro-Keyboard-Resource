@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated": "2026-09-26",
+  "generated": "2026-09-27",
   "repo": "raselrahmanrocky/Avro-Keyboard-Resource",
   "branch": "main",
   "categories": [
@@ -291,6 +291,20 @@
           "description": "Avro Keyboard feature overview.",
           "size": 117286,
           "sha256": "677bc1b7661b14ac497c88ad4a968e92a477d35ea8ab8068a9c462205de593b6"
+        }
+      ]
+    },
+    {
+      "id": "dictionary",
+      "title": "Auto-Correct Dictionary",
+      "items": [
+        {
+          "file": "Dictionary/autodict.dct",
+          "name": "autodict",
+          "type": "dict",
+          "description": "Auto-correct dictionary for Avro Phonetic. Installing autodict.dct restores automatic word correction immediately - no Avro restart needed.",
+          "size": 41982,
+          "sha256": "70e424ac1584a416908ee258df432a26171283c9ccf08df4ff4c3bd18c3177c5"
         }
       ]
     }
