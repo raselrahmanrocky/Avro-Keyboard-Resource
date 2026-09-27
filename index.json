@@ -45,7 +45,7 @@
           "version": "1.1"
         }
       ]
-    },
+    ],
     {
       "id": "keyboardlayouts",
       "title": "Keyboard Layouts",
@@ -99,7 +99,7 @@
           "sha256": "1a30c40e5f605a480dfec534987133368841bee9b4398eb122f0f39174fdae56"
         }
       ]
-    },
+    ],
     {
       "id": "fonts",
       "title": "Fonts",
@@ -137,7 +137,7 @@
           "sha256": "54a85c66ad1e6f0c50d3bda85eba5a4975fe49d06819d23230a15f3d7f0573ae"
         }
       ]
-    },
+    ],
     {
       "id": "skins",
       "title": "Skins",
@@ -231,7 +231,7 @@
           "sha256": "145791285d311b4daf9b579afb39c93d63d838722fccd3bb41b10f1577724842"
         }
       ]
-    },
+    ],
     {
       "id": "docs",
       "title": "Docs",
@@ -293,7 +293,7 @@
           "sha256": "677bc1b7661b14ac497c88ad4a968e92a477d35ea8ab8068a9c462205de593b6"
         }
       ]
-    },
+    ],
     {
       "id": "dictionary",
       "title": "Auto-Correct Dictionary",
@@ -307,6 +307,6 @@
           "sha256": "70e424ac1584a416908ee258df432a26171283c9ccf08df4ff4c3bd18c3177c5"
         }
       ]
-    }
+    ]
   ]
-}
+]
