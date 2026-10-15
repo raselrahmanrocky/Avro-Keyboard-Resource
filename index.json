@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated": "2026-10-14",
+  "generated": "2026-10-15",
   "repo": "raselrahmanrocky/Avro-Keyboard-Resource",
   "branch": "main",
   "categories": [
@@ -13,8 +13,8 @@
           "name": "Ansi V1",
           "type": "ansimapping",
           "description": "ANSI V1 - version 1.2, by Mustafa Jabbar. Suggested font: Lekhoni ANSI V1, Kalpurush ANSI, Siyam Rupali ANSI",
-          "size": 68313,
-          "sha256": "827875d1dca630ab33b1139514e00d983eaefc23b17a5efea1ab5732c68c5ab9",
+          "size": 68329,
+          "sha256": "941aef1462fa229e91c546003b8a0f1a276fae44003ea937ff33eea65a8cc371",
           "version": "1.2"
         },
         {
@@ -22,8 +22,8 @@
           "name": "Ansi V2",
           "type": "ansimapping",
           "description": "ANSI V2 - version 2.1, by Mustafa Jabbar. Suggested font: SutonnyMJ, SamakalMJ, JugantorMJ",
-          "size": 68894,
-          "sha256": "663fd785b94ef5a06223154ec880c56406aea86db59eff8c7522d0e43f79f163",
+          "size": 68631,
+          "sha256": "a1afb8a78d60d5a88bb8744653b84197cd5d3e59517df2c8031db02ffd53da97",
           "version": "2.1"
         },
         {
@@ -31,8 +31,8 @@
           "name": "Ansi V3",
           "type": "ansimapping",
           "description": "ANSI V3 - version 1.1, by Dev Infotech. Suggested font: STM-BNT-Arjun, Soumili-NT43",
-          "size": 107854,
-          "sha256": "abb2c38c4f7f653236f13416d046f1082488365979209973bd91ad91b829373b",
+          "size": 107321,
+          "sha256": "291740311bebec8f91ea6862b33ce19815a48e2736fa65755967db152be4454a",
           "version": "1.1"
         },
         {
@@ -40,8 +40,8 @@
           "name": "Ansi V4",
           "type": "ansimapping",
           "description": "ANSI V4 - version 1.1, by Computer Village. Suggested font: BanglapediaII, Ittefaq, Prothoma",
-          "size": 69068,
-          "sha256": "833d59183e94e029ac71f94522de6019b9387113721e28821e8a9504dc3cd1af",
+          "size": 69251,
+          "sha256": "9b148409dc63fd3f38f824293ba26b238facb3ddc38030a1a85fbca6b42100bd",
           "version": "1.1"
         }
       ]
