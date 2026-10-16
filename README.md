@@ -48,8 +48,11 @@ More Resources...** এ গিয়ে ক্যাটাগরি থেকে
 ### নতুন ফাইল যোগ করবেন (প্লাগ অ্যান্ড প্লে)
 
 সঠিক ফোল্ডারে ফাইলটা যোগ করে push করুন (git অথবা GitHub ওয়েব UI) — এর বাইরে
-কিছুই করতে হবে না। GitHub Actions অটো `index.json` রিজেনারেট করে, আর কয়েক
-মিনিটের মধ্যে অ্যাপের **Download Resources**-এ ফাইলটা চলে আসবে।
+কিছুই করতে হবে না। GitHub Actions অটো `index.json` রিজেনারেট করে **এবং সাইনড
+`manifest.json` নতুন ফাইলসহ আবার সাইন করে** — অ্যাপ শুধু signed manifest-এ থাকা
+ফাইল ইনস্টল করে, তাই দুটো ডকুমেন্ট একসাথে তৈরি হওয়ায় একটি অন্যটির থেকে
+পিছিয়ে যাওয়ার (drift) সম্ভাবনা নেই। কয়েক মিনিটের মধ্যে ফাইলটা অ্যাপের
+**Download Resources**-এ চলে আসবে এবং ক্লিক করলেই ডাউনলোড-ইনস্টল হবে।
 
 | ফোল্ডার | এক্সটেনশন | টাইপ |
 |---|---|---|
@@ -76,9 +79,14 @@ More Resources...** এ গিয়ে ক্যাটাগরি থেকে
 powershell -ExecutionPolicy Bypass -File tools\resource-sync\generate-resource-index.ps1
 ```
 
-স্ক্রিপ্টটি ক্যাটাগরি ফোল্ডার মিরর করার আগে সতর্কতা দেয়, `*.meta.json`
+স্ক্রিপ্টটি `assets\` থেকে ক্যাটাগরি ফোল্ডারে ফাইল কপি করে, `*.meta.json`
 সাইডকার সংরক্ষণ করে, ANSI metadata থেকে sidecar বানায় — এবং `index.json`
-রিজেনারেট করে এই রিপোর নিজের স্ক্যানারের মাধ্যমে। এরপর কমিট ও push করুন।
+রিজেনারেট করে এই রিপোর নিজের স্ক্যানারের মাধ্যমে। **যে ফাইলগুলো সরাসরি এই
+রিপোতে যোগ করা ( `assets\`-এ নেই) সেগুলো স্ক্রিপ্ট কখনও মুছে ফেলে না** —
+মুছে ফেলা হয় শুধু যেগুলো আগে `assets\` থেকে এসেছিল কিন্তু এখন `assets\`-এ
+নেই (হিসাব রাখা হয় `.mirrored-files.json`-এ, এটাও কমিট করুন)। এরপর কমিট ও
+push করুন — push করলেই CI `index.json`-এর সাথে `manifest.json`ও নিজে
+সাইন করে দেয়, তাই আলাদা কোনো সাইনিং ধাপ লাগে না।
 
 Actions না চললে স্ক্যানারটাই লোকালি চালিয়ে দিন — সেটা শুধু `index.json` লেখে:
 
@@ -137,8 +145,11 @@ every entry carries `sha256` + `size` for post-download verification.
 ### Adding a resource (plug & play)
 
 Drop a file into the right folder and push (git or the GitHub web UI) — that is
-all. GitHub Actions regenerates `index.json` automatically and the file shows
-up in Avro Keyboard's **Download Resources** within minutes.
+all. GitHub Actions regenerates `index.json` **and re-signs the Ed25519
+`manifest.json`** in the same run: the app installs only what the signed
+manifest pins, so both documents are produced together and cannot drift apart.
+The file shows up in Avro Keyboard's **Download Resources** within minutes —
+ready to download on click, with no manual signing step.
 
 | Folder | Extension | Type |
 |---|---|---|
@@ -165,9 +176,14 @@ Avro-Keyboard repository:
 powershell -ExecutionPolicy Bypass -File tools\resource-sync\generate-resource-index.ps1
 ```
 
-The script warns before wiping the category folders, preserves `*.meta.json`
+The script copies `assets\` into the category folders, preserves `*.meta.json`
 sidecars, converts ANSI metadata into sidecars — and regenerates `index.json`
-through this repository's own scanner. Then commit and push.
+through this repository's own scanner. Files placed **directly in this
+repository** (absent from `assets\`) are never deleted; only files it mirrored
+before and that have since left `assets\` are pruned, tracked in
+`.mirrored-files.json` (commit it too). Then commit and push — the push makes
+CI re-sign `manifest.json` along with the index, so no separate signing step
+exists here.
 
 If Actions is unavailable, run the scanner locally — it only writes
 `index.json`:
