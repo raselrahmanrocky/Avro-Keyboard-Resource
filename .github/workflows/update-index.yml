@@ -1,18 +1,44 @@
 name: Update resource index
 
-# Regenerates index.json whenever resource files change, so any file added to
-# this repository (git or the GitHub web UI) shows up in Avro Keyboard's
-# Download Resources section automatically within a few minutes.
+# Regenerates index.json AND re-signs manifest.json whenever resource files
+# change, so any file added to this repository (git or the GitHub web UI)
+# shows up in Avro Keyboard's Resources Management - and actually INSTALLS -
+# within a few minutes.
 #
-# Loop safety: index.json itself never triggers this workflow, the script is a
-# no-op when nothing changed (so there is nothing to commit), and pushes made
-# with the built-in GITHUB_TOKEN never re-trigger workflows.
+# WHY THE SIGNING STEP EXISTS
+# ---------------------------
+# The browser reads two documents: index.json (unsigned, listing only) and
+# manifest.json (Ed25519-signed, authorising installation). The client refuses
+# to install any file the signed manifest does not pin
+# (uResourceTrust.ResolveItem: "This file is not listed in the signed resource
+# manifest, so it cannot be installed"). Regenerating the index alone is what
+# made a freshly uploaded layout browsable but uninstallable - the two
+# documents drifted apart. One job now produces both from the same index, so
+# they cannot disagree.
+#
+# WHAT THE SIGNING STEP NEEDS
+# ---------------------------
+#   secrets.AVRO_MANIFEST_ED25519_KEY  base64 of the Ed25519 private key that
+#                                      pairs with uAvroManifestKey.pas
+#   secrets.AVRO_DEV_READ_KEY          read-only deploy key for Avro-Dev: the
+#                                      signing tool, the key unit (source of
+#                                      the keyId) and resources.lock.json
+#                                      (source of the keyEpoch) live there.
+#                                      Reading keyId/epoch from the source of
+#                                      truth is what stops a manifest carrying
+#                                      a stale keyId - the outage where every
+#                                      client refuses the whole document.
+#
+# Loop safety: index.json and manifest.json never trigger this workflow, the
+# job is a no-op when nothing changed (so there is nothing to commit), and
+# pushes made with the built-in GITHUB_TOKEN never re-trigger workflows.
 
 on:
   push:
     branches: [main]
     paths-ignore:
       - 'index.json'
+      - 'manifest.json'
       - 'README.md'
       - 'LICENSE'
       - 'licenses/**'
@@ -37,14 +63,63 @@ jobs:
         shell: pwsh
         run: ./.github/scripts/generate-index.ps1
 
+      - name: Check out Avro-Dev (signing tool, key unit, lock)
+        uses: actions/checkout@v4
+        with:
+          repository: raselrahmanrocky/Avro-Dev
+          ref: dev # Avro-Dev's default branch; source of keyId and keyEpoch
+          path: avro-dev
+          ssh-key: ${{ secrets.AVRO_DEV_READ_KEY }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install signing dependencies
+        run: python -m pip install --quiet cryptography
+
+      - name: Sign manifest.json from the regenerated index
+        env:
+          AVRO_MANIFEST_ED25519_KEY: ${{ secrets.AVRO_MANIFEST_ED25519_KEY }}
+        run: |
+          set -euo pipefail
+          if [ -z "${AVRO_MANIFEST_ED25519_KEY:-}" ]; then
+            echo "::error::AVRO_MANIFEST_ED25519_KEY is not set. Refusing to publish: an unsigned manifest.json would make every upload uninstallable."
+            exit 1
+          fi
+          printf '%s' "$AVRO_MANIFEST_ED25519_KEY" | base64 -d > "$RUNNER_TEMP/manifest_ed25519.key"
+          # keyId defaults from uAvroManifestKey.pas and keyEpoch from
+          # resources.lock.json in the avro-dev checkout, so a key rotation
+          # upstream is picked up here without editing this file.
+          python avro-dev/tools/resource-sync/sign_manifest.py sign-manifest \
+            --index index.json \
+            --private-key "$RUNNER_TEMP/manifest_ed25519.key" \
+            --out manifest.json
+          # Self-check: the bytes just written verify against the public key
+          # the application compiles in - catches a wrong key or a mangled
+          # payload before anything is committed.
+          python avro-dev/tools/resource-sync/sign_manifest.py verify \
+            --file manifest.json \
+            --public-key-pas "avro-dev/Keyboard and Spell checker/Units/uAvroManifestKey.pas"
+          rm -f "$RUNNER_TEMP/manifest_ed25519.key"
+
+      - name: Cross-check catalog and manifest
+        # The same gate the release process runs against the live documents,
+        # here against the files about to be pushed: every index item must be
+        # authorised by the manifest with the same sha256 and size.
+        run: |
+          python avro-dev/tools/resource-sync/verify_published_manifest.py \
+            --manifest manifest.json --index index.json
+
       - name: Commit and push if changed
         run: |
-          if git diff --quiet -- index.json; then
-            echo "index.json unchanged - nothing to commit."
+          if git diff --quiet -- index.json manifest.json; then
+            echo "index.json and manifest.json unchanged - nothing to commit."
             exit 0
           fi
           git config user.name "avro-index-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.json
-          git commit -m "chore: regenerate index.json [skip ci]"
+          git add index.json manifest.json
+          git commit -m "chore: regenerate index.json and re-sign manifest.json [skip ci]"
           git push
