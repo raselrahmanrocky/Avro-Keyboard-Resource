@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated": "2026-10-15",
+  "generated": "2026-10-16",
   "repo": "raselrahmanrocky/Avro-Keyboard-Resource",
   "branch": "main",
   "categories": [
@@ -73,6 +73,15 @@
           "description": "Bornona fixed keyboard layout.",
           "size": 1064904,
           "sha256": "dfea88eced26784a99e07884af52ca01c41b964eab4b10ac3642ca44d622c2d0"
+        },
+        {
+          "file": "KeyboardLayouts/Kyo Arabic Easy (Arabic Phonetic).avrolayout",
+          "name": "Kyo Arabic Easy (Arabic Phonetic)",
+          "type": "layout",
+          "description": "Kyo Arabic Easy - Arabic phonetic fixed keyboard layout for phonetic Arabic writing, heavily modified from the Kyo layout. By Toufiquzzaman Sabbir.",
+          "size": 1993707,
+          "sha256": "b758c4ad1b50cd15da876f0103981c3e67355cd12e72247d0a76f5bc4179885d",
+          "version": "1.0"
         },
         {
           "file": "KeyboardLayouts/Munir_Optima__uni_.avrolayout",
