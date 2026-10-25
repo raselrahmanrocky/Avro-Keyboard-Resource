@@ -48,9 +48,10 @@
           "file": "AnsiMapping/Ansi V5.AvroEnco",
           "name": "Ansi V5",
           "type": "ansimapping",
-          "description": "Ansi V5",
+          "description": "ANSI V5 - version 1.4, by Proshika Shabda. Suggested font: AdarshaLipi, LipiNormal, Moina",
           "size": 68407,
-          "sha256": "c26bf4d79b106afa3a5d0d0bdad374a60851b59318540206ad6b939a43e3db88"
+          "sha256": "c26bf4d79b106afa3a5d0d0bdad374a60851b59318540206ad6b939a43e3db88",
+          "version": "1.4"
         }
       ]
     },
